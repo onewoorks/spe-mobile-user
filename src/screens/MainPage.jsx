@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import MenuBlock from '../components/Menu.jsx'
+import Box from '@material-ui/core/Box'
 
 const ScreenMainPage = () => {
-
     return (
-        <div>this is main page
-            <div><Link to='/product/'>Product Page</Link></div>
-            <div><Link to='/product-avatar/'>Product Avatar Page</Link></div>
+        <div>
+            <Box style={{height:520}}>
+                <div ></div>                
+            </Box>
+            <MenuBlock />
         </div>
     )
 }
