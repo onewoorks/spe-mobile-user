@@ -1,9 +1,8 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Divider from '@material-ui/core/Divider'
 import Container from '@material-ui/core/Container'
+import Alert from '@material-ui/lab/Alert'
 
 import ProductInfo from '../../components/ProductInfo.jsx'
 import CommerceInfo from '../../components/CommerceInfo.jsx'
@@ -15,6 +14,8 @@ const ProductCariProduct = (props) => {
     const [modalOpen, setModalOpen] = React.useState(false)
     const [boxCari, setBoxCari] = React.useState(true)
     const [productData, setProductData] = React.useState(null)
+    const [productTag, setProductTag] = React.useState('2470794')
+    const [alertBox, setAlertBox] = React.useState(false)
 
     const handleModal = () => {
         setModalOpen(false)
@@ -27,19 +28,33 @@ const ProductCariProduct = (props) => {
 
     const CariForm = () => {
         const handleCari = () => {
-            axios.get('http://192.168.0.198:3003').then((response) => {
-                setBoxCari(false)
-                setProductDetail(true)
-                setProductData({
-                    nama: "ini barangnya",
-                    berat: "ini beratnya"
+            axios
+                .get(
+                    `${process.env.REACT_APP_SPE_API_V2}/Stock/item/${productTag}`
+                )
+                .then((response) => {
+                    if (!response.data){
+                        setAlertBox(true)
+                    }
+                    if (response.data) {
+                        setBoxCari(false)
+                        setProductDetail(true)
+                        setProductData(response.data[0])
+                    }
                 })
-            })
         }
         return (
             <Container>
-                <form action="">
-                    <TextField variant="outlined" size="small" type="number" />
+                { alertBox ? <Alert severity="info">Tiada barang dijumpai bagi nombor tag yang dimasukkan!</Alert> : <></> }
+                <form action="" style={{marginTop:10}}>
+                    <TextField
+                        variant="outlined"
+                        size="small"
+                        type="number"
+                        onChange={(e) => setProductTag(e.target.value)}
+                        value={productTag}
+                        autoFocus
+                    />
                     <Button
                         variant="outlined"
                         label="Cari"
@@ -48,6 +63,8 @@ const ProductCariProduct = (props) => {
                         Cari
                     </Button>
                 </form>
+
+                
             </Container>
         )
     }
@@ -55,7 +72,7 @@ const ProductCariProduct = (props) => {
     const ResultArea = () => {
         return (
             <>
-                <ProductInfo />
+                <ProductInfo  product_info={productData} />
                 <div>
                     <Button
                         onClick={() => handleUpdateWebProduct()}
@@ -78,18 +95,19 @@ const ProductCariProduct = (props) => {
                 <div className="text-center">
                     <h3>Maklumat barang untuk paparan online</h3>
                 </div>
-                { JSON.stringify(productData)}
-                <Divider />
-                <CommerceInfo triggerModal={() => handleModal()} product_data={productData} />
+                <CommerceInfo
+                    triggerModal={() => handleModal()}
+                    product_data={productData}
+                />
             </>
         )
     }
 
     return (
         <div>
-            {boxCari ? <CariForm /> : <></>}
-            {productDetail ? <ResultArea {...props} /> : <></>}
-            {modalOpen ? <ModalBox {...props} /> : <></>}
+            {boxCari ? <CariForm key="cari_1" /> : <></>}
+            {productDetail ? <ResultArea key="result_1" {...props} /> : <></>}
+            {modalOpen ? <ModalBox key="box_1" {...props} /> : <></>}
         </div>
     )
 }

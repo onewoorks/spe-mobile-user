@@ -8,7 +8,6 @@ import ScreenProductAvatar from './screens/product/Avatar.jsx'
 import ScreenProductCariProduct from './screens/product/CariProduk.jsx'
 import DrawerMenu from './components/DrawerMenu.jsx'
 
-import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'

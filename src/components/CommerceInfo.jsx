@@ -9,6 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
+import axios from 'axios'
 
 const data_kategori = require('../data/kategori.json')
 
@@ -64,6 +65,13 @@ const CommerceInfo = (props) => {
 
     const handleSubmit = () => {
         console.log(values)
+        let product = {
+            product_info: props.product_data,
+            product_online: values
+        }
+        console.log(props.product_data)
+        axios.post(`${process.env.REACT_APP_SPE_API_V2}/Stock/item/update-online`, {product})
+        .then(response=> console.log(response))
     }
 
     const ProdukCincin = () => {
@@ -221,6 +229,7 @@ const CommerceInfo = (props) => {
 
     return (
         <form noValidate autoComplete="off" >
+
             <SelectElement items={data_kategori} label="kategori" />
             <div className="button-bottom">
                 <ButtonGroup>

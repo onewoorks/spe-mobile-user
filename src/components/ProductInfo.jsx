@@ -6,7 +6,8 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import Divider from '@material-ui/core/Divider'
 
-const ProductInfo = () => {
+const ProductInfo = (props) => {
+    let product_data = props.product_info
     return (
         <div>
             <div className="text-center text-uppercase">
@@ -20,37 +21,39 @@ const ProductInfo = () => {
             />
 
             <Divider />
-
+            { (product_data !== null) ? 
             <TableContainer>
                 <Table >
                     <TableBody>
                         <TableRow>
                             <TableCell>Mutu</TableCell>
-                            <TableCell>916</TableCell>
+                            <TableCell>{product_data.mutu}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>No Tag</TableCell>
-                            <TableCell>1</TableCell>
+                            <TableCell>{product_data.no_tag}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Nama Barang</TableCell>
-                            <TableCell>1</TableCell>
+                            <TableCell>{product_data.nama_stok}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Kategori</TableCell>
-                            <TableCell>1</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Pembekal</TableCell>
-                            <TableCell>1</TableCell>
+                            <TableCell>Dulang</TableCell>
+                            <TableCell>{product_data.dulang}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Berat</TableCell>
-                            <TableCell>1</TableCell>
+                            <TableCell>{product_data.berat}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Tarikh Daftar</TableCell>
+                            <TableCell>{product_data.tarikh_daftar}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
+
+    : <></>}
         </div>
     )
 }
