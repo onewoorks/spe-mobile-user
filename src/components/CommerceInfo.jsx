@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import axios from 'axios'
+import UploadProduct from './UploadProduct.jsx'
 
 const data_kategori = require('../data/kategori.json')
 
@@ -228,8 +229,8 @@ const CommerceInfo = (props) => {
     }
 
     return (
-        <form noValidate autoComplete="off" >
-
+            <form noValidate autoComplete="off" >
+            <UploadProduct />
             <SelectElement items={data_kategori} label="kategori" />
             <div className="button-bottom">
                 <ButtonGroup>

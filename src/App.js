@@ -3,7 +3,6 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import ScreenMainPage from './screens/MainPage.jsx'
-import ScreenProductProduct from './screens/product/Product.jsx'
 import ScreenProductAvatar from './screens/product/Avatar.jsx'
 import ScreenProductCariProduct from './screens/product/CariProduk.jsx'
 import DrawerMenu from './components/DrawerMenu.jsx'
@@ -76,11 +75,6 @@ function App() {
             <div style={{ marginTop:68}}>
                 <Switch>
                     <Route exact path="/" component={ScreenMainPage} />
-                    <Route
-                        exact
-                        path="/product/"
-                        component={ScreenProductProduct}
-                    />
                     <Route
                         exact
                         path="/product-avatar/"

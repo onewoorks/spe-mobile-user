@@ -3,7 +3,7 @@ import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import axios from 'axios'
 
-const ScreenProductProduct = () => {
+const UploadProduct = () => {
     const [upImg, setUpImg] = useState()
     const [imgRef, setImgRef] = useState(null)
     const [crop, setCrop] = useState({ unit: 'px', height: 500, aspect: 1 / 1 })
@@ -114,4 +114,4 @@ const ScreenProductProduct = () => {
     )
 }
 
-export default ScreenProductProduct
+export default UploadProduct
